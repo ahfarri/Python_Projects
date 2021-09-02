@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome to Car Dealz, {{session['user_name']}}!!!!</h1>
+    <a href="/logout"><input type="button" value="Logout"></a>
+    <h2>Cars for sale</h2> 
+    <table>
+        <thead>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Seller</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for car in all_cars %}
+            <tr>
+                <td>{{car.model}}</td>
+                <td>{{car.year}}</td>
+                <td>{{car.user.first_name}} {{car.user.last_name}}</td>
+                <td><a href="/car/{{car.id}}">View</a> {% if session['user_id'] == car.users_id %} <a href="/edit/{{car.id}}">edit</a> <a href="/delete/{{car.id}}">delete</a></td> {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/new"><input type="button" value="Add A Car"></a>
+
+</body>
+</html>

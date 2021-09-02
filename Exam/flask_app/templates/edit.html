@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit {{update.model}}</h1>
+    <a href="/dashboard"><input type="button" value="Dashboard"></a>
+    <a href="/logout"><input type="button" value="Logout"></a>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+        {% if messages %}                            <!-- check if there are any messages -->
+            {% for message in messages %}            <!-- loop through the messages -->
+                <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/edit/{{update.id}}/now" method="post">
+        Price: 
+        <select name="price">
+            <option value="{{update.price}}">{{update.price}}</option>
+        </select><br>
+        Model:
+        <input type="text" name="model" value="{{update.model}}"><br>
+        Make:
+        <input type="text" name="make" value="{{update.make}}"><br>
+        Year:
+        <select name="year">
+            <option value="{{update.year}}">{{update.year}}</option>
+        </select><br>
+        Description:
+        <input type="text" name="description" value="{{update.description}}"><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
